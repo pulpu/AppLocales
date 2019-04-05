@@ -1,16 +1,16 @@
 const initialState = {
-    age:21
+    filePath:'ssss'
 };
 
 const reducer = (state = initialState, action) => {
     const newState = {...state}
 
     if(action.type === 'AGE_UP'){
-        newState.age++
+        newState.filePath++
     }
 
     if(action.type === 'AGE_DOWN'){
-        newState.age--
+        newState.filePath = action.file
     }
 
     return newState;

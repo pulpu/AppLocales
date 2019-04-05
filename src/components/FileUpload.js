@@ -57,7 +57,7 @@ class FileUpload extends Component {
           <progress className="col-12" value={this.state.progress} max="100"/>
         </div>
         <div className="container">
-          <div>{this.props.age}</div>
+          <div>{this.props.filePath}</div>
           <button onClick={this.props.onAgeUp}> age up</button>
           <button onClick={this.props.onAgeDown}>age down</button>
         </div>
@@ -67,14 +67,14 @@ class FileUpload extends Component {
 }
 const mapStateToProps = state => {
   return {
-      age: state.age
+    filePath: state.filePath
   }
 };
 
 const mapDispatchToProps = dispatch => {
   return {
       onAgeUp: () => {dispatch({type: 'AGE_UP'})},
-      onAgeDown: () => {dispatch({type: 'AGE_DOWN'})}
+      onAgeDown: () => {dispatch({type: 'AGE_DOWN', file: 'lorem'})}
   }
 }
 
