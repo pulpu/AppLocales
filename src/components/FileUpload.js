@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {storage} from '../Firebase';
-import { connect } from "react-redux";
+
 
 class FileUpload extends Component {
   constructor(props) {
@@ -38,6 +38,7 @@ class FileUpload extends Component {
         // complete function ....
         storage.ref('files').child(file.name).getDownloadURL().then(url => {
             console.log(url);
+            this.props.urlFilePath(url);
             this.setState({url});
         })
     });
@@ -47,35 +48,19 @@ class FileUpload extends Component {
       <div className="container">
         <div className="row">
           <div className="col-8">
-            <input type="file" onChange={this.handleChange}/>
+            <input className="btn btn-primary" type="file" onChange={this.handleChange}/>
           </div>
           <div className="col-4">
-            <button onClick={this.handleUpload}>Upload</button>
+            <button className="btn btn-primary" onClick={this.handleUpload}>Upload</button>
           </div>
         </div>
         <div className="row mt-2">
           <progress className="col-12" value={this.state.progress} max="100"/>
         </div>
-        <div className="container">
-          <div>{this.props.filePath}</div>
-          <button onClick={this.props.onAgeUp}> age up</button>
-          <button onClick={this.props.onAgeDown}>age down</button>
-        </div>
       </div>
     )
   }
 }
-const mapStateToProps = state => {
-  return {
-    filePath: state.filePath
-  }
-};
 
-const mapDispatchToProps = dispatch => {
-  return {
-      onAgeUp: () => {dispatch({type: 'AGE_UP'})},
-      onAgeDown: () => {dispatch({type: 'AGE_DOWN', file: 'lorem'})}
-  }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps) (FileUpload);
+export default FileUpload;

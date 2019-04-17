@@ -1,16 +1,21 @@
 const initialState = {
-    filePath:'ssss'
+    filePath:'',
+    url: ''
 };
 
 const reducer = (state = initialState, action) => {
     const newState = {...state}
 
-    if(action.type === 'AGE_UP'){
-        newState.filePath++
+    if(action.type === 'PATH_RESET'){
+        newState.filePath = initialState.filePath
     }
 
-    if(action.type === 'AGE_DOWN'){
-        newState.filePath = action.file
+    if(action.type === 'UPLOAD_PATH'){
+        newState.filePath = newState.url
+    }
+
+    if(action.type === 'URL_PATH') {
+        newState.url = action.url
     }
 
     return newState;

@@ -13,12 +13,17 @@ class uploadTranslations extends Component {
             <div className="container">
                 <div className="row text-center">
                     <div className="col-12">
-                        <ImageUpload/>
+                        <ImageUpload urlFilePath={this.props.UrlPath}/>
+                        <div className="container">
+                            <div>{this.props.filePath}</div>
+                            <button onClick={this.props.ResetPath}>Reset Path</button>
+                            <button onClick={this.props.FileUpload}>Add Path</button>
+                        </div>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-12">
-                    <ParseObject />
+                    <ParseObject myObjectFilePath={this.props.filePath}/>
                         the word in en
                     </div>
                     <ul className="col-12">
@@ -34,5 +39,18 @@ class uploadTranslations extends Component {
     } 
 }
 
+const mapStateToProps = state => {
+    return {
+        filePath: state.filePath
+    }
+};
+  
+const mapDispatchToProps = dispatch => {
+    return {
+        ResetPath: () => {dispatch({type: 'PATH_RESET'})},
+        FileUpload: () => {dispatch({type: 'UPLOAD_PATH'})},
+        UrlPath: (url) => {dispatch({type: 'URL_PATH', url: url})}
+    }
+}
 
-export default uploadTranslations;
+export default connect(mapStateToProps, mapDispatchToProps) (uploadTranslations);
